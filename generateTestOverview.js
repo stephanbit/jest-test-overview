@@ -15,8 +15,8 @@ const process = require('process');
  *   outputFilePath (optional) - The file path for the generated overview. Defaults to 'overview.md' in the script's location.
  */
 
-const testDir = process.argv[2] || path.join(__dirname, '__tests__');
-const outputFilePath = process.argv[3] || path.join(__dirname, 'documentation/test_overview.md');
+const testDir = process.argv[2] || path.join(process.cwd(), '__tests__');
+const outputFilePath = process.argv[3] || path.join(process.cwd(), 'documentation/test_overview.md');
 
 // Function to extract descriptions from a single test file
 async function extractDescriptionsFromFile(filePath) {
