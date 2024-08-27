@@ -1,0 +1,26 @@
+{
+  "name": "jest-test-overview",
+  "version": "1.0.0",
+  "description": "Generate markdown file of jest tests",
+  "main": "generateTestOverview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephanbit/jest-test-overview.git"
+  },
+  "keywords": [
+    "jest",
+    "tests",
+    "e2e",
+    "generator",
+    "markdown"
+  ],
+  "author": "Stephan Bitomsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephanbit/jest-test-overview/issues"
+  },
+  "homepage": "https://github.com/stephanbit/jest-test-overview#readme"
+}
