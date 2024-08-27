@@ -1,92 +1,103 @@
-# Generate Test Suite Overview for Jest
 
-This script generates a Markdown overview of all test files within a specified directory. The overview includes descriptions of `describe` and `test` blocks found in the JavaScript test files. The script can be installed and used within any project.
+# jest-test-overview
+
+`jest-test-overview` is a simple Node.js script that generates a Markdown overview of all test files within a specified directory. The script scans for `describe` and `test` blocks in your Jest test files, including skipped tests, and outputs a structured Markdown file.
 
 ## Features
 
-- **Extracts Descriptions:** Collects descriptions from `describe` and `test` blocks in the test files.
-- **Supports Skipped Tests:** Identifies and marks skipped tests and `describe` blocks.
-- **Generates Markdown:** Outputs the collected information into a well-structured Markdown file.
+- **Extracts Descriptions:** Collects and lists `describe` and `test` blocks found in your test files.
+- **Supports Skipped Tests:** Highlights skipped tests and `describe` blocks with a warning.
+- **Additional Documentation:** Allows embedding of additional documentation using special comments in your test files.
+- **Generates Markdown:** Creates a Markdown file that provides an overview of your test suite.
 
 ## Installation
 
-To use this script in a specific project, you can install it locally via npm.
-
-### Step 1: Install the Package Locally
-
-Navigate to your project directory and run:
+You can install this package locally in your project using npm:
 
 ```bash
 npm install jest-test-overview
 ```
 
-This will install the package in the `node_modules` directory of your project and add it as a dependency in your `package.json`.
+## Usage
 
-### Step 2: Run the Script
+### Command-Line Usage
 
-You can run the script using `npx`, which allows you to execute binaries from your local `node_modules`:
-
-```bash
-npx generate-test-overview [testDir] [outputFilePath]
-```
-
-Alternatively, you can add a script entry to your project's `package.json` for convenience:
-
-```json
-{
-  "scripts": {
-    "build:overview": "generate-test-overview [testDir] [outputFilePath]"
-  }
-}
-```
-
-Then, you can run the script with:
+After installing, you can use the script via the command line in your project directory:
 
 ```bash
-npm run generate-overview
+npx jest-test-overview [testDir] [outputFilePath]
 ```
+
+### Arguments
+
+- **`testDir` (optional):** The directory containing the test files. Defaults to `__tests__` in the current working directory.
+- **`outputFilePath` (optional):** The file path for the generated overview. Defaults to `documentation/test_overview.md` in the current working directory.
 
 ### Example
 
+To generate an overview of the test files in the default `__tests__` directory and save it to `documentation/test_overview.md`, run:
+
 ```bash
-npx generate-test-overview ./test-directory ./output/overview.md
+npx jest-test-overview
 ```
 
-This command generates a Markdown overview of the test files located in `./test-directory` and saves it to `./output/overview.md`.
+If your test files are located in a different directory and you want to specify a custom output file, you could use:
 
-## Usage
+```bash
+npx jest-test-overview ./src/tests ./output/test_overview.md
+```
 
-### Command-Line Arguments
+This will generate a Markdown file with an overview of the test files in `./src/tests` and save it to `./output/test_overview.md`.
 
-+ `testDir` (optional): The directory containing the test files. Defaults to the `__tests__` directory if not specified.
-+ `outputFilePath` (optional): The file path where the generated overview should be saved. Defaults to overview.md if not specified.
+### Additional Documentation
 
-### Using in Code
-
-If your package exports functions or modules, you can require and use it in your project’s code:
+You can add custom documentation to specific `describe` or `test` blocks by including a special comment in your test files. This comment should be formatted as:
 
 ```javascript
-const generateOverview = require('your-package-name');
-
-generateOverview([testDir], [outputFilePath]);
+// @doc: This is a custom documentation comment that will be included in the overview.
 ```
 
-## Script Overview
+For example:
 
-The script does the following:
+```javascript
+// @doc: This suite tests the user login functionality.
+describe('User Login', () => {
+  // @doc: This test checks if a user can log in with valid credentials.
+  test('logs in successfully with correct credentials', () => {
+    // Test code here
+  });
+});
+```
 
-1. **Traverse the Directory**: It scans the specified directory (or the default `__tests__` directory) for JavaScript files.
-1. **Extract Descriptions**: It reads each file, extracts descriptions from `describe`, `describe.skip`, `test`, and `test.skip` blocks, and collects them.
-1. **Generate Markdown**: It formats the collected information into a Markdown structure and writes it to the specified output file.
+The content following `@doc:` will be included in the generated Markdown file as additional documentation for the corresponding `describe` or `test` block.
 
-## Error Handling
-The script includes basic error handling to manage issues such as missing directories or files. If an error occurs, it will log the error message to the console.
+## Programmatic Usage
+
+You can also use `jest-test-overview` programmatically in your Node.js scripts:
+
+```javascript
+const generateOverview = require('jest-test-overview');
+
+generateOverview('./src/tests', './output/test_overview.md');
+```
+
+## Output
+
+The generated Markdown file will have the following structure:
+
+- **Test suite name**: The name of each `describe` block is shown as a section title.
+- **Test cases**: Each `test` block is listed under its corresponding `describe` block.
+- **Skipped tests**: Skipped `describe` and `test` blocks are clearly marked with a warning icon.
+- **Additional Documentation**: Any `@doc:` comments are included as additional documentation under the relevant `describe` or `test` block.
 
 ## License
+
 This project is licensed under the MIT License.
 
 ## Contributing
-Feel free to submit issues or pull requests if you have any improvements or suggestions.
+
+Contributions are welcome! Please open an issue or submit a pull request if you have any improvements or suggestions.
 
 ## Author
+
 Created by Stephan Bitomsky.

@@ -1,6 +1,6 @@
 {
   "name": "jest-test-overview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate markdown file of jest tests",
   "bin": "generateTestOverview.js",
   "main": "generateTestOverview.js",
