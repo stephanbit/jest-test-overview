@@ -1,7 +1,8 @@
 {
   "name": "jest-test-overview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate markdown file of jest tests",
+  "bin": "generateTestOverview.js",
   "main": "generateTestOverview.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
